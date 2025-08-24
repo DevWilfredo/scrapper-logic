@@ -1,11 +1,12 @@
 FROM ghcr.io/puppeteer/puppeteer:24.17.0
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+# No descargues Chromium (ya viene con la imagen)
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 RUN npm ci
 COPY . .
+
 CMD [ "node", "app.js" ]
